@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, func
-from sqlalchemy.orm import declarative_base, Mapped, mapped_column, relationship
-
+from sqlalchemy.orm import declarative_base, Mapped, mapped_column, relationship, Session
+from datetime import datetime
 
 Base = declarative_base()
 
@@ -11,7 +11,6 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(String(128), nullable=False)
     nickname: Mapped[str] = mapped_column(String(50), unique=True, index=True)
-
     posts: Mapped[list['Post']] = relationship('Post', back_populates='author')
 
 class Post(Base):
@@ -22,6 +21,5 @@ class Post(Base):
     title: Mapped[str] = mapped_column(String(100), nullable=False)
     content: Mapped[str] = mapped_column(Text, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
-
     author: Mapped[User] = relationship('User', back_populates='posts')
 
