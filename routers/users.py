@@ -9,7 +9,7 @@ from utils.security import get_password_hash
 router = APIRouter()
 
 
-@router.post("/register", response_model=schemas.UserCreate)
+@router.post("/register", response_model=schemas.UserResponse)
 async def create_user(user_in: schemas.UserCreate, db: AsyncSession = Depends(get_db)):
     # Проверяем, нет ли такого пользователя
     existing_user = await db.execute(select(models.User).where(models.User.username == user_in.username))
@@ -21,6 +21,7 @@ async def create_user(user_in: schemas.UserCreate, db: AsyncSession = Depends(ge
     # Создаем пользователя
     user = models.User(
         username=user_in.username,
+        email=str(user_in.email),
         hashed_password=get_password_hash(user_in.password)
     )
 
