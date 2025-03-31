@@ -23,3 +23,5 @@ class Post(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     author: Mapped[User] = relationship('User', back_populates='posts')
 
+
+

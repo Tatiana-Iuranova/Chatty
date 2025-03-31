@@ -18,3 +18,21 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+#Posts
+
+
+# Base.metadata.create_all(bind=engine)
+
+
+class PostCreate(BaseModel):
+    title: str
+    content: str
+
+
+class PostResponse(PostCreate):
+    id: int
+    author_id: int
+
+    class Config:
+        from_attributes = True

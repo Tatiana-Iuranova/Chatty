@@ -6,7 +6,7 @@ from datetime import timedelta
 from database import get_db
 from models import User
 from schemas import UserCreate, UserLogin, UserResponse
-from security import get_password_hash, verify_password, create_access_token
+from utils.security import get_password_hash, verify_password, create_access_token
 
 router = APIRouter()
 
