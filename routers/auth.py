@@ -21,7 +21,7 @@ async def register_user(user_create: UserCreate, db: AsyncSession = Depends(get_
 
     # Хешируем пароль
     hashed_password = get_password_hash(user_create.password)
-    new_user = User(email=user_create.email, hashed_password=hashed_password, nickname=user_create.nickname)
+    new_user = User(email=user_create.email, hashed_password=hashed_password, username=user_create.username)
 
     db.add(new_user)
     await db.commit()
