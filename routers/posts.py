@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import Session, relationship
 from database import Base, engine, get_db
 from models import User
-from auth import get_current_user
+from utils.security import get_current_user
 from pydantic import BaseModel
 from typing import List
 
