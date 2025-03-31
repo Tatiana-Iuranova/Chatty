@@ -3,15 +3,19 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file='.env.local', extra='ignore', case_sensitive=False
+        env_file='.env.local',
+        extra='ignore',
+        case_sensitive=False
     )
+    APP_NAME: str = "FastAPI App"
+    DEBUG: bool = True
 
     # PostgreSQL database settings
     db_host: str = 'localhost'
     db_port: int = 5432
-    db_name: str = 'books_db'
+    db_name: str = "chatty_db"
     db_user: str = 'postgres'
-    db_password: str = None  # Password can be optional
+    db_password: str = None  # Password can be migrationsoptional
 
     # Other settings (optional)
     debug: bool = False
