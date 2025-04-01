@@ -29,4 +29,4 @@ async def create_user(user_in: schemas.UserCreate, db: AsyncSession = Depends(ge
     await db.commit()
     await db.refresh(user)
 
-    return user
+    return schemas.UserResponse(id=user.id, username=user.username, email=user.email)
