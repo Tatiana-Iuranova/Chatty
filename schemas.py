@@ -5,7 +5,7 @@ from datetime import datetime
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
-    nickname: str
+    username: str
 
 class UserLogin(BaseModel):
     email: EmailStr
@@ -14,7 +14,7 @@ class UserLogin(BaseModel):
 class UserResponse(BaseModel):
     id: int
     email: str
-    nickname: str
+    username: str
 
     class Config:
         from_attributes = True
