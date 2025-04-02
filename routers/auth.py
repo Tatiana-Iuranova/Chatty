@@ -42,4 +42,10 @@ async def login_user(user_login: UserLogin, db: AsyncSession = Depends(get_db)):
     access_token_expires = timedelta(minutes=30)
     access_token = create_access_token(data={"sub": user.email}, expires_delta=access_token_expires)
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "id": user.id,
+        "email": user.email,
+        "username": user.username,
+        "access_token": access_token,
+        "token_type": "bearer"
+    }
