@@ -6,7 +6,7 @@ from datetime import timedelta
 from database import get_db
 from models import User
 from schemas import UserCreate, UserLogin, UserResponse
-from security import get_password_hash, verify_password, create_access_token
+from utils.security import get_password_hash, verify_password, create_access_token
 
 router = APIRouter()
 
@@ -21,7 +21,7 @@ async def register_user(user_create: UserCreate, db: AsyncSession = Depends(get_
 
     # Хешируем пароль
     hashed_password = get_password_hash(user_create.password)
-    new_user = User(email=user_create.email, hashed_password=hashed_password, nickname=user_create.nickname)
+    new_user = User(email=user_create.email, hashed_password=hashed_password, username=user_create.username)
 
     db.add(new_user)
     await db.commit()
@@ -42,4 +42,10 @@ async def login_user(user_login: UserLogin, db: AsyncSession = Depends(get_db)):
     access_token_expires = timedelta(minutes=30)
     access_token = create_access_token(data={"sub": user.email}, expires_delta=access_token_expires)
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "id": user.id,
+        "email": user.email,
+        "username": user.username,
+        "access_token": access_token,
+        "token_type": "bearer"
+    }

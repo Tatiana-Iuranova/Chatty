@@ -9,8 +9,8 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
-    password_hash: Mapped[str] = mapped_column(String(128), nullable=False)
-    nickname: Mapped[str] = mapped_column(String(50), unique=True, index=True)
+    hashed_password: Mapped[str] = mapped_column(String(128), nullable=False)
+    username: Mapped[str] = mapped_column(String(50), unique=True, index=True)
     posts: Mapped[list['Post']] = relationship('Post', back_populates='author')
 
 class Post(Base):
@@ -22,4 +22,6 @@ class Post(Base):
     content: Mapped[str] = mapped_column(Text, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     author: Mapped[User] = relationship('User', back_populates='posts')
+
+
 

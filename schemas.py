@@ -5,7 +5,7 @@ from datetime import datetime
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
-    nickname: str
+    username: str
 
 class UserLogin(BaseModel):
     email: EmailStr
@@ -14,7 +14,27 @@ class UserLogin(BaseModel):
 class UserResponse(BaseModel):
     id: int
     email: str
-    nickname: str
+    username: str
+
+    class Config:
+        from_attributes = True
+
+
+
+#Posts
+
+
+# Base.metadata.create_all(bind=engine)
+
+
+class PostCreate(BaseModel):
+    title: str
+    content: str
+
+
+class PostResponse(PostCreate):
+    id: int
+    author_id: int
 
     class Config:
         from_attributes = True
