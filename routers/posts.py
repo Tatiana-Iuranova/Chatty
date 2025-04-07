@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends, status, APIRouter
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, select
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session, relationship
 from database import engine, get_db
 from models import User, Post
